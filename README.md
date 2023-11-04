@@ -7,7 +7,7 @@
 # About
 A GPT powered color palette generator.
 
-Visit [app](https://palette-generator.vercel.app/)
+Visit [app](https://promptcolorpicker.vercel.app/)
 
 # Contributing
 Read the [contribution guidelines](docs/contributing/contributing.md) for detailed information on how to contribute.
