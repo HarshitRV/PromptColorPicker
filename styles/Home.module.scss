@@ -1,0 +1,57 @@
+.main {
+	min-height: 100vh;
+	position: relative;
+
+	.input {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 999;
+	}
+
+	.pallete {
+		background-color: red;
+		width: 100vw;
+		height: 100vh;
+		position: absolute;
+		display: flex;
+		// flex-direction: column; // for mobile
+
+		.colorRed {
+			background-color: red;
+		}
+
+		.colorBlue {
+			background-color: blue;
+		}
+
+		.colorYellow {
+			background-color: yellow;
+		}
+
+		.colorPurple {
+			background-color: purple;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.pallete {
+		flex-direction: column;
+	}
+
+	.input {
+		display: flex;
+		width: 75%;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.customToastContainer {
+		width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}

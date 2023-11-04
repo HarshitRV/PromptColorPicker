@@ -1,0 +1,50 @@
+.color {
+	// flex-grow: 1; // for mobile
+	background-color: green;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+
+	.option {
+		margin-bottom: 50px;
+		font-size: x-large;
+		font-weight: 800;
+		cursor: pointer;
+		letter-spacing: 5px;
+		opacity: 0;
+	}
+
+	.copy {
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		font-size: 14px;
+		font-weight: 500;
+		letter-spacing: 3px;
+		background-color: black;
+		color: white;
+        padding: 5px;
+        // set border radius for bottom right
+        border-bottom-right-radius: 5px;
+	}
+}
+
+.color:hover {
+	.option {
+		opacity: 1;
+	}
+}
+
+@media (max-width: 768px) {
+	.color {
+		flex-grow: 1;
+	}
+
+    .copy {
+        right: 0%;
+        border-bottom-right-radius: none;
+    }
+}
