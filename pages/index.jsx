@@ -37,29 +37,6 @@ export default function Home() {
 		setCanGenerate(true);
 	};
 
-	const getHandler = async () => {
-		const id = toast.loading("Loading...");
-
-		const response = await fetch("/api/hello");
-
-		const data = await response.json();
-		if (data.id) {
-			toast.update(id, {
-				render: "Success",
-				type: "success",
-				autoClose: 3000,
-				isLoading: false,
-			});
-		} else if (data.error) {
-			toast.update(id, {
-				render: data.error,
-				type: "error",
-				autoClose: 3000,
-				isLoading: false,
-			});
-		}
-	};
-
 	useEffect(() => {
 		const textArr = [
 			"Tesla theme color pallete",
@@ -147,7 +124,6 @@ export default function Home() {
 						onClick={getColorPallete}>
 						Generate
 					</button>
-					<button onClick={getHandler}>Rate Limit</button>
 				</div>
 				<div className={styles.pallete}>
 					{colorPallete.map((color, index) => {
