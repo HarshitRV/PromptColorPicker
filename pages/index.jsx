@@ -27,7 +27,7 @@ export default function Home() {
 			return;
 		}
 
-		if(value.trim().length > 50) {
+		if (value.trim().length > 50) {
 			setCanGenerate(false);
 			toast.error("Only 50 characters allowed!");
 			return;
@@ -35,6 +35,29 @@ export default function Home() {
 
 		setInputText(value);
 		setCanGenerate(true);
+	};
+
+	const getHandler = async () => {
+		const id = toast.loading("Loading...");
+
+		const response = await fetch("/api/hello");
+
+		const data = await response.json();
+		if (data.id) {
+			toast.update(id, {
+				render: "Success",
+				type: "success",
+				autoClose: 3000,
+				isLoading: false,
+			});
+		} else if (data.error) {
+			toast.update(id, {
+				render: data.error,
+				type: "error",
+				autoClose: 3000,
+				isLoading: false,
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -54,17 +77,41 @@ export default function Home() {
 	});
 
 	const getColorPallete = async () => {
-		const response = await toast.promise(
-			fetch("/api/pallete", {
-				method: "POST",
-				body: JSON.stringify({ input: inputText }),
-			}),
-			{
-				pending: "Loading...",
-				success: "Success!",
-				error: "Error",
-			}
-		);
+		setCanGenerate(false);
+
+		const id = toast.loading("Loading...");
+
+		const response = await fetch("/api/pallete", {
+			method: "POST",
+			body: JSON.stringify({ input: inputText }),
+		});
+
+		if (!response.ok) {
+			toast.update(id, {
+				render: response.statusText,
+				type: "error",
+				autoClose: 3000,
+				isLoading: false,
+				closeOnClick: true,
+			});
+			toast.info("Only 3 requests per minute allowed!", {
+				autoClose: 3000,
+				closeOnClick: true,
+				hideProgressBar: false,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
+		} else if (response.status === 200) {
+			toast.update(id, {
+				render: "Success",
+				type: "success",
+				autoClose: 3000,
+				isLoading: false,
+				closeOnClick: true,
+			});
+		}
 
 		const data = await response.json();
 		setColorPallete(data.pallete);
@@ -100,6 +147,7 @@ export default function Home() {
 						onClick={getColorPallete}>
 						Generate
 					</button>
+					<button onClick={getHandler}>Rate Limit</button>
 				</div>
 				<div className={styles.pallete}>
 					{colorPallete.map((color, index) => {
