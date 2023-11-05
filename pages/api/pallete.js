@@ -1,5 +1,11 @@
 import { validateAndParseHexCodeArray } from "./utils";
 import OpenAI from "openai";
+import rateLimit from "../utils/rate-limit";
+
+const limiter = rateLimit({
+	interval: 1 * 60 * 1000, // 10 seconds
+	uniqueTokenPerInterval: 50, // 50 users per second
+});
 
 const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
@@ -26,7 +32,6 @@ const getGPTSuggestion = async (prompt) => {
 		return response.choices[0].message.content;
 	} catch (e) {
 		console.error("OPEN_AI_ERROR", e);
-		return null;
 	}
 };
 
@@ -67,6 +72,7 @@ const getColorPallete = () => {
 export default async function handler(req, res) {
 	try {
 		if (req.method === "POST") {
+			await limiter.check(res, 3 + 1, process.env.CACHE_TOKEN); // 3 requests per minute
 			const { input } = JSON.parse(req.body);
 
 			if (!input) {
@@ -94,8 +100,10 @@ export default async function handler(req, res) {
 	} catch (e) {
 		console.error("Pallete Handler error", e);
 		console.log("Body", req.body);
-		return res
-			.status(200)
-			.json({ success: false, statusCode: 500, pallete: getColorPallete() });
+		return res.status(429).json({
+			success: false,
+			error: "Only 3 requests per minute allowed",
+			pallete: getColorPallete(),
+		});
 	}
 }
