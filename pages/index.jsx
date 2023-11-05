@@ -9,7 +9,7 @@ export default function Home() {
 	const [inputText, setInputText] = useState("");
 	const [canGenerate, setCanGenerate] = useState(false);
 	const [placeHolderText, setPlaceHolderText] = useState(
-		"Google theme color pallete"
+		"Describe your theme...🔥"
 	);
 	const [colorPallete, setColorPallete] = useState([
 		"#FF5B22",
@@ -39,11 +39,11 @@ export default function Home() {
 
 	useEffect(() => {
 		const textArr = [
-			"Tesla theme color pallete",
-			"Star wars theme color pallete",
-			"F.R.I.N.D.S apartment theme color pallete",
-			"Harry potter theme color pallete",
-			"2 year old birthday party theme color pallete",
+			"Tesla theme color pallete 🏎️",
+			"Star wars theme ✨",
+			"F.R.I.N.D.S apartment theme 🤷‍♂️",
+			"Harry potter theme 🧙‍♂️",
+			"2 year old birthday party theme 🎂",
 		];
 
 		const interval = setInterval(() => {
