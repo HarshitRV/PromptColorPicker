@@ -1,6 +1,6 @@
 import { validateAndParseHexCodeArray } from "./utils";
 import OpenAI from "openai";
-import rateLimit from "../utils/rate-limit";
+import rateLimit from "@/utils/rate-limit";
 
 const limiter = rateLimit({
 	interval: 1 * 60 * 1000, // 10 seconds

@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import rateLimit from "../utils/rate-limit";
+import rateLimit from "@/utils/rate-limit";
 
 const limiter = rateLimit({
 	interval: 5000, // 1minute
