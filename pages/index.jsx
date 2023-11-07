@@ -112,7 +112,7 @@ export default function Home() {
 				/>
 			</Head>
 			<main className={styles.main}>
-				<div className={styles.input}>
+				<form className={styles.input} onSubmit={getColorPallete}>
 					<input
 						type="text"
 						onChange={inputChangeHandler}
@@ -124,7 +124,7 @@ export default function Home() {
 						onClick={getColorPallete}>
 						Generate
 					</button>
-				</div>
+				</form>
 				<div className={styles.pallete}>
 					{colorPallete.map((color, index) => {
 						return (
