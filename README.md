@@ -16,4 +16,4 @@ Read the [contribution guidelines](docs/contributing/contributing.md) for detail
 [MIT](LICENSE)
 
 # Connect
-[Discord]()
+[Discord](https://discord.com/invite/5PNFxQF2nz)
